@@ -2,7 +2,7 @@
 
 import pytest
 
-from supermarket_receipt_api.checkout import line_subtotal_cents, percentage_discount_cents
+from supermarket_receipt_api.checkout import line_subtotal_cents, percentage_discount_cents, validate_quantity
 
 
 @pytest.mark.parametrize(
@@ -55,3 +55,20 @@ def test_percentage_discount_nominal(
         AssertionError: Si la réduction calculée diffère de expected.
     """
     assert percentage_discount_cents(subtotal_cents, discount_percent) == expected
+
+def test_validate_quantity_valeur_normale():
+    assert validate_quantity(5) == 5
+
+def test_validate_quantity_valeur_negative():
+    with pytest.raises(ValueError):
+        validate_quantity(-5)
+
+def test_validate_quantity_valeur_true():
+    with pytest.raises(TypeError):
+        validate_quantity(True)
+
+def test_three_for_two_discount_cents():
+    quantity = 3
+    unit_price_cents = 100
+    expected_discount = 100
+    assert three_for_two_discount_cents(unit_price_cents, quantity) == expected_discount

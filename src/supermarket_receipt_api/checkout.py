@@ -40,6 +40,7 @@ CATALOG = {
 
 
 def validate_quantity(quantity: int) -> int:
+    
     """Valider une quantité entière strictement positive, sans conversion.
 
     Aucun effet de bord ; une fraction de gramme ou de pièce n'est pas acceptée.
