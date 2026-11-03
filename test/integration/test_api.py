@@ -1,7 +1,5 @@
 """Tests d'intégration HTTP pour l'API de caisse, via TestClient FastAPI."""
 
-"""Tests d'intégration HTTP pour l'API de caisse, via TestClient FastAPI."""
-
 import pytest
 from fastapi.testclient import TestClient
 
@@ -52,24 +50,18 @@ def test_checkout_accepted_three_for_two() -> None:
 @pytest.mark.parametrize(
     "payload",
     [
-        {"items": [{"product_id": "toothbrush"}]},  # champ manquant : quantity
-        {
-            "items": [{"product_id": "toothbrush", "quantity": 1, "gift_wrap": True}]
-        },  # champ en trop
-        {"items": [{"product_id": "toothbrush", "quantity": "trois"}]},  # mal typé
+        {"items": [{"product_id": "toothbrush"}]},
+        {"items": [{"product_id": "toothbrush", "quantity": 1, "gift_wrap": True}]},
+        {"items": [{"product_id": "toothbrush", "quantity": "trois"}]},
     ],
 )
 def test_checkout_rejected_invalid_payload(payload: dict[str, object]) -> None:
-    """Vérifier qu'une requête avec un champ manquant, en trop ou mal typé est refusée.
+    """Vérifier qu'une requête invalide est refusée.
 
-    Aucun effet de bord. La validation est faite par FastAPI/Pydantic avant le moteur
-    métier, en mode strict (extra="forbid", strict=True).
+    La validation est faite par FastAPI/Pydantic avant le moteur métier.
 
     Args:
-        payload (dict[str, object]): Corps JSON invalide fourni par pytest.
-
-    Returns:
-        None: Le test réussit si la requête est refusée avec le statut 422.
+        payload: Corps JSON invalide fourni par pytest.
 
     Raises:
         AssertionError: Si le statut diffère de 422.
