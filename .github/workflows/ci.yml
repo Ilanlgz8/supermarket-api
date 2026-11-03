@@ -16,4 +16,8 @@ jobs:
         with:
           persist-credentials: false
 
-      # À compléter pendant le TD : environnement, dépendances et vérifications.
+      - name: "Installer Python et uv"
+        uses: "astral-sh/setup-uv@v10.2.0"
+        with:
+          python-version: "3.13"
+          enable-cache: false
