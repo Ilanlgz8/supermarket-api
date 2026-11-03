@@ -71,4 +71,4 @@ def test_three_for_two_discount_cents():
     quantity = 3
     unit_price_cents = 100
     expected_discount = 100
-    assert three_for_two_discount_cents(unit_price_cents, quantity) == expected_discount
+    assert test_three_for_two_discount_cents(unit_price_cents, quantity) == expected_discount
