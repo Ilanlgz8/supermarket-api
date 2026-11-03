@@ -40,7 +40,6 @@ CATALOG = {
 
 
 def validate_quantity(quantity: int) -> int:
-    
     """Valider une quantité entière strictement positive, sans conversion.
 
     Aucun effet de bord ; une fraction de gramme ou de pièce n'est pas acceptée.
@@ -203,9 +202,7 @@ def three_for_two_discount_cents(unit_price_cents: int, quantity: int) -> int:
         ValueError: Si le prix est négatif ou la quantité n'est pas strictement positive.
     """
     line_subtotal_cents(unit_price_cents, quantity, "piece")
-    if quantity > 3:
-        return (quantity // 3) * unit_price_cents
-    return 0
+    return (quantity // 3) * unit_price_cents
 
 
 def percentage_discount_cents(subtotal_cents: int, discount_percent: int) -> int:
