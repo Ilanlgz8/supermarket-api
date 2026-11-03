@@ -5,7 +5,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from supermarket_api.main import app
+from supermarket_receipt_api.main import app
 
 client = TestClient(app)
 
